@@ -2,9 +2,15 @@ public class Box {
   private double width;
   private double height;
   private double length;
+  public Box next;
   
   //constructors
-  public Box() {}
+  public Box(double newWidth, double newHeight, double newLength, Box newNext) {
+    width = newWidth;
+    height = newHeight;
+    length = newLength;
+    next = newNext;
+  }
   
   public Box(double newWidth, double newHeight, double newLength) {
     width = newWidth;
@@ -32,5 +38,13 @@ public class Box {
       return true;
     }
     return false;
+  }
+
+  //extra methods
+  public Box getNext() {
+    return next;
+  }
+  public Box setNext(Box newNext) {
+    next = newNext;
   }
 }
