@@ -40,11 +40,4 @@ public class Box {
     return false;
   }
 
-  //extra methods
-  public Box getNext() {
-    return next;
-  }
-  public Box setNext(Box newNext) {
-    next = newNext;
-  }
 }
