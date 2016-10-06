@@ -9,15 +9,12 @@ public class LinkedList {
     // WRITE YOUR CODE HERE.
         //if LinkedList is empty
         if (head == null) {
-            return b;
-        }
-
-        //if LinkedList is not empty
-        Box iterator = head;
-        while(iterator.next != null) {
-            iterator.next;
-        }
-        iterator.next = b;
+            head = b;
+            iterator=head;
+        } else {
+            iterator.next = b;
+            iterator = iterator.next;
+       }
     }
 
     /* Insert b in position pos. If insertion is successful
@@ -28,27 +25,30 @@ public class LinkedList {
         //if pos is 0
         if (pos == 0) {
             b.next = head;
+            return true;
         }
 
         //all other positions (except last)
         int counter = 1;
         Box prev = head;
-        Box iterator = head.next;
+        Box iterator = head.getNext();
         while (iterator != null) {
             if (counter == pos) {
                 prev.next = b;
                 b.next = iterator;
+                return true;
             }
             prev = iterator;
-            iterator = iterator.next;
+            iterator = iterator.getNext();
             counter++;            
         }
 
         //last position
         if (counter == (pos + 1)) {
             prev.next = b;
+            return true;
         }
-
+        return false;
     }
 
     /**Print width, height, length, and volume of each of the boxes in
@@ -69,7 +69,7 @@ public class LinkedList {
                 System.out.println("The length of the box #" + counter + " is: " + iterator.getLength());
                 System.out.println("The volume of the box #" + counter + " is: " + iterator.getVolume());
                 System.out.print("\n");
-                iterator = iterator.next;
+                iterator = iterator.getNext();
                 counter++;
             }
         }
@@ -80,23 +80,25 @@ public class LinkedList {
     * is successful, otherwise return false.*/
     boolean removeNode(int pos){
     // WRITE YOUR CODE HERE.
-        if (pos = 0) {
-            head = head.next;
+        if (pos == 0) {
+            head = head.getNext();
+            return true;
         }
 
         int counter = 1;
         Box prev = head;
-        Box iterator = head.next;
+        Box iterator = head.getNext();
 
         while(iterator != null) { //edgarr: test with last box
             if (pos ==  counter) {
-                prev.next = iterator.next;
+                prev.next = iterator.getNext();
+                return true;
             }
             prev = iterator;
-            iterator = iterator.next;
+            iterator = iterator.getNext();
             counter++;
         }
-
+        return false;
     }
 
     /** Return the box in position pos. Return null when pos is
@@ -111,13 +113,14 @@ public class LinkedList {
                 return iterator;
             }
 
-            iterator = iterator.next;
+            iterator = iterator.getNext();
             counter++;
         }
 
         //pos is greater than linked list. edgarr: test with position greater than list size
-        System.out.print("You have entered an invalid position");
-        break;
+        System.out.println("Position was not found.");
+        
+        return head;
     }
 
     /**Print width, height, length, and volume of each of the boxes in
@@ -138,8 +141,8 @@ public class LinkedList {
         //edgarr: test this loop
         while (counter == 0) {
             iterator = head;
-            for (int i = 0; i > counter; i--) {
-                iterator = iterator.next;
+            for (int i = 0; i > counter; i++) {
+                iterator = iterator.getNext();
             }
             System.out.println("The width of the box #" + counter + " is: " + iterator.getWidth());
             System.out.println("The height of the box #" + counter + " is: " + iterator.getHeight());

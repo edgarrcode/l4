@@ -5,17 +5,13 @@ public class Box {
   public Box next;
   
   //constructors
-  public Box(double newWidth, double newHeight, double newLength, Box newNext) {
-    width = newWidth;
-    height = newHeight;
-    length = newLength;
-    next = newNext;
-  }
-  
   public Box(double newWidth, double newHeight, double newLength) {
     width = newWidth;
     height = newHeight;
     length = newLength;
+  }
+  
+  public Box() {
   }
   
   //accessors
@@ -27,6 +23,9 @@ public class Box {
   }
   public double getLength() {
     return length;
+  }
+  public Box getNext() {
+    return next;
   }
   
   public double getVolume() {
