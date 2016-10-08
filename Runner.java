@@ -32,7 +32,7 @@ public class Runner {
         //check if data is in correct format
         if (eachLine.length != 3) {
             try {
-                throw new IOException("There should only be 3 values per line.");
+                throw new IOException("File should have 3 values per line.");
             } catch(IOException e) {
                 System.out.println(e.getMessage());
                 System.exit(1);
@@ -133,7 +133,7 @@ public class Runner {
             //call read file with the file name as parameter
             theLinkedList = readFile(fileName);
         } catch(FileNotFoundException e) {
-            System.err.println("File not found!" + e.getMessage());
+            System.err.println("File not found! " + e.getMessage());
             System.exit(1);
         } catch(NumberFormatException e) {
             System.err.println("The file should only contain numbers of double precision and single spaces (example: \"1.0 2.3 1.3\"). " + e.getMessage());
@@ -178,8 +178,17 @@ public class Runner {
 
         //removeNode
         System.out.println("Remove Node");
-        if(theLinkedList.removeNode(10)) {
-            System.out.println("    Linked list item 10 was successfully removed.");
+        System.out.println("Enter the position of the node that you would like to remove (e.g. 0, 1, 2...):");
+        int removeNodePosition = -1;
+        boolean removeNodeSuccess = false;
+        try {
+            removeNodePosition = scnr.nextInt();
+        } catch(InputMismatchException e) {
+            System.err.println("Please enter an integer! To try again run the program again.");
+            System.exit(1);
+        }
+        if(theLinkedList.removeNode(removeNodePosition)) {
+            System.out.println("    Linked list item " + removeNodePosition + " was successfully removed.");
         } else {
             System.out.println("    No list item was removed, position not found!");
         }
@@ -189,10 +198,44 @@ public class Runner {
         System.out.print("\n");
 
         //insertNode
+        double addNewBoxWidth = -1;
+        double addNewBoxHeight = -1;
+        double addNewBoxLength = -1;
+        int addNewBoxPosition = -1;
         System.out.println("Insert Node");
-        Box newBox = new Box(100, 100, 100);
-        if(theLinkedList.insertNode(newBox, 100)) {
-            System.out.println("    New Box successfully added in position 100.");
+        System.out.println("Enter the width of the new box (use numbers of double precision e.g. 1.0, 2.0, 3.0...):");
+        try {
+            addNewBoxWidth = scnr.nextDouble();
+        } catch(InputMismatchException e) {
+            System.err.println("Please enter an double precision number! To try again run the program again.");
+            System.exit(1);
+        }
+        System.out.println("Enter the height of the new box:");
+        try {
+            addNewBoxHeight = scnr.nextDouble();
+        } catch(InputMismatchException e) {
+            System.err.println("Please enter an double precision number! To try again run the program again.");
+            System.exit(1);
+        }
+        System.out.println("Enter the length of the new box:");
+        try {
+            addNewBoxLength = scnr.nextDouble();
+        } catch(InputMismatchException e) {
+            System.err.println("Please enter an double precision number! To try again run the program again.");
+            System.exit(1);
+        }
+        System.out.println("Enter the desired position of the new box:");
+        try {
+            addNewBoxPosition = scnr.nextInt();
+        } catch(InputMismatchException e) {
+            System.err.println("Please enter an integer! To try again run the program again.");
+            System.exit(1);
+        }
+
+
+        Box newBox = new Box(addNewBoxWidth, addNewBoxHeight, addNewBoxLength);
+        if(theLinkedList.insertNode(newBox, addNewBoxPosition)) {
+            System.out.println("    New Box successfully added in position " + addNewBoxPosition + ".");
         } else {
             System.out.println("    No Box was added, invalid position!");
         }

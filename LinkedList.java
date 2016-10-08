@@ -41,11 +41,11 @@ public class LinkedList {
             }
             prev = iterator;
             iterator = iterator.getNext();
-            counter++;            
+            counter++;
         }
 
         //last position
-        if (counter == (pos + 1)) {
+        if (counter == pos) {
             prev.next = b;
             return true;
         }
